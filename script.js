@@ -104,14 +104,7 @@ function sumArrayBalance(){
 console.log(sumArrayBalance());
 
 
-// function maxBalance(){
-//   return Math.max(...normalBalance());
-//}
-
-const maxBalance = Number(Math.max(...normalBalance()))
-//  const maxBalance = users
-//      .map(user => Number(user.balance.replace(/\D/g, "")) || 0)
-//      .filter((user) => Math.max.apply(null, users.balance))
+const maxBalance = Number(Math.max(...normalBalance().map(user => user.balance)))
 console.log(maxBalance);
 
 
