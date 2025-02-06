@@ -80,7 +80,7 @@ const users = [
 console.log(users);
 
 const lowerBalance = users
-    .filter(user => Number(user.balance.replace(/\D/g, "")) > 2000)
+    .filter(user => Number(user.balance.replace(/\D/g, "")) < 200000)
     .map(user => user.phone)
 console.log(lowerBalance);
 
