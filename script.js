@@ -91,6 +91,12 @@ const sumArrayBalance = users
  console.log(sumArrayBalance);
 
 
+ const maxBalance = users
+     .map(user => Number(user.balance.replace(/\D/g, "")) || 0)
+     .filter(user => Math.max(user.balance, 0))
+console.log(maxBalance);
+
+
 // Написати функції для наступних дій:
 
 // #1 Повернути масив телефонних номерів користувачів, у яких баланс менше ніж 2000 доларів.
