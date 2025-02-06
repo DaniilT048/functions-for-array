@@ -93,8 +93,10 @@ const sumArrayBalance = users
 
  const maxBalance = users
      .map(user => Number(user.balance.replace(/\D/g, "")) || 0)
-     .filter(user => Math.max(user.balance, 0))
+     .filter(user => Math.max.apply(user.balance))
 console.log(maxBalance);
+
+
 
 
 // Написати функції для наступних дій:
