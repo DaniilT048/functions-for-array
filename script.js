@@ -77,6 +77,20 @@ const users = [
   }
 ];
 
+console.log(users);
+
+const lowerBalance = users
+    .filter(user => Number(user.balance.replace(/\D/g, "")) > 2000)
+    .map(user => user.phone)
+console.log(lowerBalance);
+
+
+const sumArrayBalance = users
+    .map(user => Number(user.balance.replace(/\D/g, "")) || 0) //Тут пришлось покопаться в инернете, нашел такую замечатльную штуку /\D/g, чтоб чистить массив от лишнего скажем так
+    .reduce((a, b) => a + b, 0);
+ console.log(sumArrayBalance);
+
+
 // Написати функції для наступних дій:
 
 // #1 Повернути масив телефонних номерів користувачів, у яких баланс менше ніж 2000 доларів.
