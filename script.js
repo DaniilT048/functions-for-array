@@ -79,21 +79,39 @@ const users = [
 
 console.log(users);
 
-const lowerBalance = users
-    .filter(user => Number(user.balance.replace(/\D/g, "")) < 200000)
-    .map(user => user.phone)
-console.log(lowerBalance);
+function normalBalance(){
+  return users.map( user => ({
+    ...user,
+    balance: Number(user.balance.replace('$','').replace(',',''))
+  }))
+}
+console.log(normalBalance());
 
 
-const sumArrayBalance = users
-    .map(user => Number(user.balance.replace(/\D/g, "")) || 0) //Тут пришлось покопаться в инернете, нашел такую замечатльную штуку /\D/g, чтоб чистить массив от лишнего скажем так
-    .reduce((a, b) => a + b, 0);
- console.log(sumArrayBalance);
+function lowerBalance(){
+  return normalBalance()
+      .filter(user => user.balance < 2000)
+      .map(user => user.phone)
+}
+console.log(lowerBalance());
 
 
- const maxBalance = users
-     .map(user => Number(user.balance.replace(/\D/g, "")) || 0)
-     .filter(user => Math.max.apply(user.balance))
+function sumArrayBalance(){
+  return normalBalance()
+      .map(user => user.balance)
+      .reduce((a, b) => a + b, 0);
+}
+console.log(sumArrayBalance());
+
+
+// function maxBalance(){
+//   return Math.max(...normalBalance());
+//}
+
+const maxBalance = Number(Math.max(...normalBalance()))
+//  const maxBalance = users
+//      .map(user => Number(user.balance.replace(/\D/g, "")) || 0)
+//      .filter((user) => Math.max.apply(null, users.balance))
 console.log(maxBalance);
 
 
