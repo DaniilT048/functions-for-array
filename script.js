@@ -76,49 +76,51 @@ const users = [
     "address": "730 Seba Avenue, Osage, Alabama, 6290"
   }
 ];
-
 console.log(users);
 
-const getUsersNormalizedBalance = () => {
-  return users.map( user => ({
-    ...user,
-    balance: Number(user.balance.replace('$','').replace(',',''))
-  }))
+function getNumBalance(textBalance){
+  return Number(textBalance.replace('$','').replace(',',''));
 }
-console.log(getUsersNormalizedBalance());
 
 
-const lowerBalance = () => {
-  return getUsersNormalizedBalance()
-      .filter(user => user.balance < 2000)
+const lowerBalance = (usersParam) => {
+  return usersParam
+      .filter(user => getNumBalance(user.balance) < 2000)
       .map(user => user.phone)
 }
-console.log(lowerBalance());
+console.log(lowerBalance(users));
 
 
-const sumArrayBalance = () => {
-  return getUsersNormalizedBalance()
-      .map(user => user.balance)
+const sumArrayBalance = (usersParams) => {
+  return usersParams
+      .map(user => getNumBalance(user.balance))
       .reduce((a, b) => a + b, 0);
 }
-console.log(sumArrayBalance());
+console.log(sumArrayBalance(users));
 
 
+const maxBalance = (userParam) => {
+  const usersBalances = userParam.map(user => getNumBalance(user.balance));
+  const userMaxBalance = Math.max(...usersBalances);
 
-const maxBalance = () => {
-  const usersBalances = getUsersNormalizedBalance();
-  const userMaxBalance = Math.max(...usersBalances.map(user => user.balance))
+  return usersBalances.filter(user => getNumBalance(user.balance) === userMaxBalance)
+}
+console.log(maxBalance(users));
 
-  return usersBalances.filter(user => user.balance === userMaxBalance)
+
+function duplicatesFilter(value, index, array) {
+  return array.indexOf(value) !== index;
 }
 
-console.log(maxBalance());
-
-
-const duplicatesUserName = () => {
-  return users.map(user => user.name).filter(user => user.name !== user.name) // Мои полномочия на этом всё
+const duplicatesUserName = (allUsers) => {
+  const usersNames = allUsers.map(user => user.name);
+  const duplicatesNames = usersNames.filter(duplicatesFilter)
+  return allUsers.filter(user => duplicatesNames.includes(user.name));
 }
-console.log(duplicatesUserName());
+console.log(duplicatesUserName(users));
+
+
+
 
 // Написати функції для наступних дій:
 
@@ -127,6 +129,28 @@ console.log(duplicatesUserName());
 // #3 Знайти користувача з максімальним балансом, вивести його
 // #4 Вивести користувачів з повторюючимися іменами
 
+//OLD ATTEMPTS
+
+// const getUsersNormalizedBalance = () => {
+//   return users.map( user => ({
+//     ...user,
+//     balanceNum: Number(user.balance.replace('$','').replace(',',''))
+//   }))
+// }
+// console.log(getUsersNormalizedBalance());
+//
+// users['balanceNumber'] = getUsersNormalizedBalance();
+// console.log(users);
+
+
+
+// const duplicateTest = (value, index, array) => array.indexOf(value) !== index;
+// const duplicatesUserName = (allUsers) => {
+//   const usersNames = allUsers.map(user => user.name);
+//   const duplicatesNames = usersNames.filter((value, index, array) => array.indexOf(value) !== index)
+//   return allUsers.filter(user => duplicatesNames.includes(user.name));
+// }
+// console.log(duplicatesUserName(users));
 
 
 
