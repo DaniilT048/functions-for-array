@@ -79,17 +79,17 @@ const users = [
 
 console.log(users);
 
-const normalBalance = () => {
+const getUsersNormalizedBalance = () => {
   return users.map( user => ({
     ...user,
     balance: Number(user.balance.replace('$','').replace(',',''))
   }))
 }
-console.log(normalBalance());
+console.log(getUsersNormalizedBalance());
 
 
 const lowerBalance = () => {
-  return normalBalance()
+  return getUsersNormalizedBalance()
       .filter(user => user.balance < 2000)
       .map(user => user.phone)
 }
@@ -97,7 +97,7 @@ console.log(lowerBalance());
 
 
 const sumArrayBalance = () => {
-  return normalBalance()
+  return getUsersNormalizedBalance()
       .map(user => user.balance)
       .reduce((a, b) => a + b, 0);
 }
@@ -106,17 +106,17 @@ console.log(sumArrayBalance());
 
 
 const maxBalance = () => {
-  const userBalance = normalBalance();
-  const userMaxBalance = Math.max(...userBalance.map(user => user.balance))
+  const usersBalances = getUsersNormalizedBalance();
+  const userMaxBalance = Math.max(...usersBalances.map(user => user.balance))
 
-  return userBalance.filter(user => user.balance === userMaxBalance)
+  return usersBalances.filter(user => user.balance === userMaxBalance)
 }
 
 console.log(maxBalance());
 
 
 const duplicatesUserName = () => {
-  return users.map(user => user.name).filter(user => user.name === user.name) // Мои полномочия на этом всё
+  return users.map(user => user.name).filter(user => user.name !== user.name) // Мои полномочия на этом всё
 }
 console.log(duplicatesUserName());
 
