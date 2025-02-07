@@ -103,7 +103,7 @@ const maxBalance = (userParam) => {
   const usersBalances = userParam.map(user => getNumBalance(user.balance));
   const userMaxBalance = Math.max(...usersBalances);
 
-  return usersBalances.filter(user => user.balance === userMaxBalance)
+  return usersBalances.filter(user => user === userMaxBalance)
 }
 console.log(maxBalance(users));
 
