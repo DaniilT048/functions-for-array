@@ -115,6 +115,10 @@ const maxBalance = () => {
 console.log(maxBalance());
 
 
+const duplicatesUserName = () => {
+  return users.map(user => user.name).filter(user => user.name === user.name) // Мои полномочия на этом всё
+}
+console.log(duplicatesUserName());
 
 // Написати функції для наступних дій:
 
