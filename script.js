@@ -79,7 +79,7 @@ const users = [
 
 console.log(users);
 
-function normalBalance(){
+const normalBalance = () => {
   return users.map( user => ({
     ...user,
     balance: Number(user.balance.replace('$','').replace(',',''))
@@ -88,7 +88,7 @@ function normalBalance(){
 console.log(normalBalance());
 
 
-function lowerBalance(){
+const lowerBalance = () => {
   return normalBalance()
       .filter(user => user.balance < 2000)
       .map(user => user.phone)
@@ -96,7 +96,7 @@ function lowerBalance(){
 console.log(lowerBalance());
 
 
-function sumArrayBalance(){
+const sumArrayBalance = () => {
   return normalBalance()
       .map(user => user.balance)
       .reduce((a, b) => a + b, 0);
@@ -104,9 +104,15 @@ function sumArrayBalance(){
 console.log(sumArrayBalance());
 
 
-const maxBalance = Math.max(...normalBalance().map(user => user.balance))
-console.log(maxBalance);
 
+const maxBalance = () => {
+  const userBalance = normalBalance();
+  const userMaxBalance = Math.max(...userBalance.map(user => user.balance))
+
+  return userBalance.filter(user => user.balance === userMaxBalance)
+}
+
+console.log(maxBalance());
 
 
 
